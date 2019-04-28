@@ -22,7 +22,7 @@ class DB {
 	
 	public function getAllMeasurements() {
 		$sql = "SELECT * FROM measurements";
-        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);;
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	public function getMeasurementsByQuantityName(string $quantityName) {
@@ -33,6 +33,11 @@ class DB {
 		ORDER BY m.time ASC";
 		$queryHandler = $this->pdo->prepare($sql);
 		return ($queryHandler->execute([ 'quantityName' => $quantityName ])) ? $queryHandler->fetchAll( PDO::FETCH_ASSOC ) : [];
+	}
+
+	public function getAllQuantities() {
+		$sql = "SELECT * FROM physical_quantities";
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	public function test(string $quantityName) {

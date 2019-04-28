@@ -6,4 +6,4 @@ require_once './dbs.class.php';
 
 $db = DB::getInstance();
 var_dump($db->getTableList());
-var_dump($db->test('temperature'));
+var_dump($db->getAllQuantities());

@@ -1,5 +1,4 @@
 <?php
-
 require_once '_includes/helpers.php';
 require_once '_includes/database.php';
 
@@ -38,7 +37,7 @@ function handleMeasurementsGetRequest(array $request) {
     
     switch($type) {
         case 'all':
-            $result = getAll();
+            $result = getAllMeasurements();
             if($result['success']) 
                 printMessage($result['message'], $result['success'], $result['data']);
             else 
@@ -77,6 +76,26 @@ function handleMeasurementsGetRequest(array $request) {
                 printMessage($result['message']);
             break;
 
+        default:
+            printMessage('Wrong format of type supplied.');
+            break;
+    }
+}
+
+function handleQuantitiesGetRequest($request) {
+    if(empty($request)) return printMessage("No quantities specified.");
+    $type = array_shift($request);
+    if(!empty($request)) return printMessage('Too many arguments in URL');
+
+    switch($type) {
+        case 'all':
+            $result = getAllQuantities();
+            if($result['success']) 
+                printMessage($result['message'], $result['success'], $result['data']);
+            else 
+                printMessage($result['message']);
+            break;
+            
         default:
             printMessage('Wrong format of type supplied.');
             break;
